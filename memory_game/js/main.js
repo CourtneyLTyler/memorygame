@@ -26,13 +26,26 @@ var cards = [
 // create empty array to hold the cards while they are in play
 var cardsInPlay = [];
 
+// create var to define the user's score
+var userScore = 0;
+
+// create variable to link to HTML element
+var setScore = document.getElementById("score");
+
+
 // create fx to check if the cardsInPlay elements match and notify user
 var checkForMatch = function() {
 	if (cardsInPlay[0] === cardsInPlay[1]) {
 		alert("You found a match!");
+		// add a point to the score
+		userScore +=1;
+		// send new userScore value to html element for display
+		setScore.innerHTML = userScore;
+		// empty the cardsInPlay array
 		cardsInPlay = [];
 	} else {
 		alert("Sorry, try again.");
+		// empty the cardsInPlay array
 		cardsInPlay = [];
 	}
 };
