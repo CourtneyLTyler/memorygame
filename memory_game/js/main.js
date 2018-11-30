@@ -30,8 +30,10 @@ var cardsInPlay = [];
 var checkForMatch = function() {
 	if (cardsInPlay[0] === cardsInPlay[1]) {
 		alert("You found a match!");
+		cardsInPlay = [];
 	} else {
 		alert("Sorry, try again.");
+		cardsInPlay = [];
 	}
 };
 
@@ -43,13 +45,30 @@ var flipCard = function() {
 	cardsInPlay.push(cards[cardId].rank);
 	// add the cardImage for the current card
 	this.setAttribute("src", cards[cardId].cardImage);
-	// run checkForMatch fx when there's an even number of elements in cardsInPlay array
-	if (cardsInPlay.length % 2 === 0) {
+	// run checkForMatch fx when there's two elements in cardsInPlay array
+	if (cardsInPlay.length === 2) {
 	checkForMatch();
  } else {
 	// if the above isn't true, send following alert to user
 	alert("Flip another card");
 }
+};
+
+// create fx to present cards array in random order
+var shuffle = function(cards) {
+	var currentIndex = cards.length;
+	var temporaryValue, randomIndex;
+	// While there are more than 0 elements in the array
+	while (0 !== currentIndex) {
+		// Pick one randomly
+		randomIndex = Math.floor(Math.random() * currentIndex);
+		currentIndex -= 1;
+		// And swap it with the current element.
+		temporaryValue = cards[currentIndex];
+		cards[currentIndex] = cards[randomIndex];
+		cards[randomIndex] = temporaryValue;
+	}
+	return cards;
 };
 
 // create fx to make the game board and add event handler
@@ -66,12 +85,22 @@ var createBoard = function() {
 		cardElement.addEventListener("click", flipCard);
 		// add the var carElement to the element w/specified id
 		document.getElementById("game-board").appendChild(cardElement);
+		
 	}
 };
 
 // execute the createBoard fx
 createBoard();
 
+// create fx to loop through cards array and set images to back of card
+var unflipCards = function() {
+	shuffle(cards);
+	for (var i=0; i < cards.length; i++) {
+		document.getElementsByTagName("img")[i].setAttribute("src", "images/back.png");
+	}	
+};
 
+// add event handler to execute unflipCards fx when reset button is clicked
+document.getElementById("reset-button").addEventListener("click", unflipCards);
 
 
