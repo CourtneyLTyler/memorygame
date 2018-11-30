@@ -1,5 +1,5 @@
 
-// create object with each card's properties
+// create object with each element(card)'s properties
 var cards = [
 {
 	rank: "queen",
@@ -29,11 +29,11 @@ var cardsInPlay = [];
 // create var to define the user's score
 var userScore = 0;
 
-// create variable to link to HTML element
+// create variable to link to HTML element 'score'
 var setScore = document.getElementById("score");
 
 
-// create fx to check if the cardsInPlay elements match and notify user
+// create fx to check if the cardsInPlay elements match, and notify user
 var checkForMatch = function() {
 	if (cardsInPlay[0] === cardsInPlay[1]) {
 		alert("You found a match!");
@@ -70,13 +70,12 @@ var flipCard = function() {
 // create fx to present cards array in random order
 var shuffle = function(cards) {
 	var currentIndex = cards.length;
-	var temporaryValue, randomIndex;
-	// While there are more than 0 elements in the array
+	// while there are more than 0 elements in the array
 	while (0 !== currentIndex) {
-		// Pick one randomly
+		// pick one randomly
 		randomIndex = Math.floor(Math.random() * currentIndex);
 		currentIndex -= 1;
-		// And swap it with the current element.
+		//  switch it with the current element.
 		temporaryValue = cards[currentIndex];
 		cards[currentIndex] = cards[randomIndex];
 		cards[randomIndex] = temporaryValue;
@@ -96,9 +95,8 @@ var createBoard = function() {
 		cardElement.setAttribute("data-id", i);
 		// add event handler to execute flipCard fx when user clicks
 		cardElement.addEventListener("click", flipCard);
-		// add the var carElement to the element w/specified id
+		// add the var cardElement to the element w/specified id
 		document.getElementById("game-board").appendChild(cardElement);
-		
 	}
 };
 
